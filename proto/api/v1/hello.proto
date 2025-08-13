@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package api.v1;
+
+option go_package = "github.com/alcastic/lab-go-protoc-config/generated/proto/api/v1";
+
+// Hello represents a sample resource
+message Hello {
+  string name = 1;
+}
