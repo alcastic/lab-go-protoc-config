@@ -16,10 +16,14 @@ install-deps:
 
 protoc-gen:
 	@echo "🔄 Generating Go code from proto files..."
-	@find proto -name "*.proto" -exec protoc \
-		--go_out=. --go_opt=module=${GO_MODULE} \
-		--go-grpc_out=.  --go-grpc_opt=module=${GO_MODULE} \
-		{} \;
+	@set -e; \
+	for proto_file in $$(find proto -name "*.proto"); do \
+		echo "Processing: $$proto_file"; \
+		protoc \
+			--go_out=. --go_opt=module=${GO_MODULE} \
+			--go-grpc_out=. --go-grpc_opt=module=${GO_MODULE} \
+			"$$proto_file" || exit 1; \
+	done
 	@echo "✅ Proto files generated successfully"
 
 gen: check-deps protoc-gen
