@@ -1,4 +1,5 @@
-GO_MODULE := "github.com/alcastic/lab-go-protoc-config"
+# Extract module name from go.mod
+GO_MODULE := $(shell grep '^module ' go.mod | sed 's/^module //')
 
 .PHONY: gen protoc-gen clean check-deps run build test install-deps
 
