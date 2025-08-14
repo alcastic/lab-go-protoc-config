@@ -1,3 +1,5 @@
+GO_MODULE := "github.com/alcastic/lab-go-protoc-config"
+
 .PHONY: gen protoc-gen clean check-deps run build test install-deps
 
 # Check if protoc and Golang plugins are installed
@@ -14,8 +16,8 @@ install-deps:
 protoc-gen:
 	@echo "🔄 Generating Go code from proto files..."
 	@find proto -name "*.proto" -exec protoc \
-		--go_out=. --go_opt=module=github.com/alcastic/lab-go-protoc-config \
-		--go-grpc_out=.  --go-grpc_opt=module=github.com/alcastic/lab-go-protoc-config \
+		--go_out=. --go_opt=module=${GO_MODULE} \
+		--go-grpc_out=.  --go-grpc_opt=module=${GO_MODULE} \
 		{} \;
 	@echo "✅ Proto files generated successfully"
 
